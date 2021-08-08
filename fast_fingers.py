@@ -42,11 +42,12 @@ class TypingBot:
                 box.send_keys(Keys.SPACE)
                 i += 1
                 sleep(w_cooldown)
-
-bot = TypingBot()
-bot.initialize()
-wlist = bot.get_word_list()
-input("Press any key...")
-bot.type_words(len(wlist))
+                
+if __name__ == "__main__":
+    bot = TypingBot()
+    bot.initialize()
+    wlist = bot.get_word_list()
+    input("Press any key...")
+    bot.type_words(len(wlist))
 
 print("end")

@@ -36,10 +36,11 @@ def type_words(box, wpm, w_cooldown=0, l_cooldown=0):
             i += 1
             sleep(w_cooldown)
 
-input_box = driver.find_element_by_xpath('//*[@id="inputfield"]')
-input_box.click()
-sleep(10)
-wlist = get_word_list()
-type_words(input_box, len(wlist))
 
-print("end")
+if __name__ == "__main__":
+    input_box = driver.find_element_by_xpath('//*[@id="inputfield"]')
+    input_box.click()
+    sleep(10)
+    wlist = get_word_list()
+    type_words(input_box, len(wlist))
+    print("end")

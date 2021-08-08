@@ -27,6 +27,11 @@ class TypingBot:
     def get_word_list(self):
         wlist = self.driver.find_element_by_id(
             "wordlist").get_attribute("innerHTML")
+        self.driver.find_element_by_xpath(
+            '//*[@id="fs-slot-footer-wrapper"]/button').click()
+
+    def get_word_list(self):
+        wlist = self.driver.find_element_by_id("wordlist").get_attribute("innerHTML")
         return wlist.split('|')
 
     def type_words(self, wpm, w_cooldown=0, l_cooldown=0):
@@ -52,8 +57,7 @@ class TypingBot:
                 box.send_keys(Keys.SPACE)
                 i += 1
                 sleep(w_cooldown)
-
-
+                
 if __name__ == "__main__":
     bot = TypingBot()
     bot.initialize()

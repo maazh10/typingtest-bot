@@ -1,6 +1,7 @@
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.keys import Keys
+import constants
 
 class TypingBot:
     def __init__(self):
@@ -90,28 +91,28 @@ if __name__ == "__main__":
 
     if res == "1":
         print("\n-------- MODE: VERY SLOW --------")
-        lc = 0.4
-        wc = 0.5
+        lc = constants.VS_LC
+        wc = constants.VS_WC
     elif res == "2":
         print("\n-------- MODE: SLOW --------")
-        lc = 0.2
-        wc = 0.5
+        lc = constants.S_LC
+        wc = constants.S_WC
     elif res == "3":
         print("\n-------- MODE: MEDIUM --------")
-        lc = 0.1
-        wc = 0.4
+        lc = constants.M_LC
+        wc = constants.M_WC
     elif res == "4":
         print("\n-------- MODE: FAST --------")
-        lc = 0
-        wc = 0.2
+        lc = constants.F_LC
+        wc = constants.F_WC
     elif res == "5":
         print("\n-------- MODE: VERY FAST --------")
-        lc = 0
-        wc = 0.1
+        lc = constants.VF_LC
+        wc = constants.VF_WC
     elif res == "6":
         print("\n-------- MODE: ULTRA --------")
-        lc = 0
-        wc = 0
+        lc = constants.U_LC
+        wc = constants.U_WC
     elif res == "7":
         print("\n-------- MODE: CUSTOM --------")
         words = input("Number of words to type [enter max for maximum]: ")

@@ -4,7 +4,11 @@ from selenium.webdriver.common.keys import Keys
 
 class TypingBot:
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--ignore-ssl-errors')
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        self.driver = webdriver.Chrome(options=options)
         self.driver.get("https://10fastfingers.com/typing-test/english")
 
     def initialize(self):
@@ -53,8 +57,10 @@ class TypingBot:
                 i += 1
                 sleep(w_cooldown)
 
-
 if __name__ == "__main__":
+
+    print("\n... LOADING ...")
+
     bot = TypingBot()
     bot.initialize()
     wlist = bot.get_word_list()
@@ -63,7 +69,7 @@ if __name__ == "__main__":
     wc = 0
     lc = 0
 
-    print("\n--------PICK A MODE--------")
+    print("\n-------- PICK A MODE --------")
     print("1 - Very Slow")
     print("2 - Slow")
     print("3 - Medium")
@@ -71,37 +77,38 @@ if __name__ == "__main__":
     print("5 - Very Fast")
     print("6 - Ultra")
     print("7 - Custom")
+    print("8 - Exit")
     res = ""
-    res = input("Enter your choice (1-7): ")
-    while res not in "1234567":
-        res = input("Please enter a valid choice (1-7): ")
+    res = input("Enter your choice (1-8): ")
+    while res not in "12345678":
+        res = input("Please enter a valid choice (1-8): ")
 
     if res == "1":
-        print("\n--------MODE: VERY SLOW--------")
+        print("\n-------- MODE: VERY SLOW --------")
         lc = 0.4
         wc = 0.5
     elif res == "2":
-        print("\n--------MODE: SLOW--------")
+        print("\n-------- MODE: SLOW --------")
         lc = 0.2
         wc = 0.5
     elif res == "3":
-        print("\n--------MODE: MEDIUM--------")
+        print("\n-------- MODE: MEDIUM --------")
         lc = 0.1
         wc = 0.4
     elif res == "4":
-        print("\n--------MODE: FAST--------")
+        print("\n-------- MODE: FAST --------")
         lc = 0
         wc = 0.2
     elif res == "5":
-        print("\n--------MODE: VERY FAST--------")
+        print("\n-------- MODE: VERY FAST --------")
         lc = 0
         wc = 0.1
     elif res == "6":
-        print("\n--------MODE: ULTRA--------")
+        print("\n-------- MODE: ULTRA --------")
         lc = 0
         wc = 0
     elif res == "7":
-        print("\n--------MODE: CUSTOM--------")
+        print("\n-------- MODE: CUSTOM --------")
         words = input("Number of words to type [enter max for maximum]: ")
         if words == "max":
             words = len(wlist)
@@ -117,7 +124,11 @@ if __name__ == "__main__":
             wc = 0
         else:
             wc = float(wc)
+    elif res == "8":
+        bot.driver.close()
+        exit()
 
     input("\nPress any key to begin...")
     bot.type_words(words, wc, lc)
-    print("\n--------END--------")
+    
+    print("\n-------- END --------")

@@ -120,4 +120,4 @@ if __name__ == "__main__":
 
     input("\nPress any key to begin...")
     bot.type_words(words, wc, lc)
-    print("end")
+    print("\n--------END--------")

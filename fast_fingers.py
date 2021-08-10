@@ -3,15 +3,20 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 import constants
 
+# main bot class
 class TypingBot:
     def __init__(self):
+        # neglect warnings and certificate errors to clean up terminal
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        # initialize chrome driver
         self.driver = webdriver.Chrome(options=options)
+        # navigate to 10fastfingers
         self.driver.get("https://10fastfingers.com/typing-test/english")
 
+    # set window size, close all popups 
     def initialize(self):
         self.driver.set_window_size(1024, 600)
         self.driver.maximize_window()
@@ -29,23 +34,22 @@ class TypingBot:
                 '//*[@id="fs-slot-footer-wrapper"]/button').click()
             self.driver.find_element_by_xpath('//*[@id="Layer_1"]').click()
 
-    def get_word_list(self):
-        wlist = self.driver.find_element_by_id(
-            "wordlist").get_attribute("innerHTML")
-        self.driver.find_element_by_xpath(
-            '//*[@id="fs-slot-footer-wrapper"]/button').click()
-
+    # grab the word list from inner HTML
     def get_word_list(self):
         wlist = self.driver.find_element_by_id("wordlist").get_attribute("innerHTML")
         return wlist.split('|')
 
     def type_words(self, wpm, w_cooldown=0, l_cooldown=0):
+        # find and click the input box
         box = self.driver.find_element_by_xpath('//*[@id="inputfield"]')
         box.click()
+        # get word list and find the timer
         wlist = self.get_word_list()
         timer = self.driver.find_element_by_id("timer")
+        # if theres no letter cooldown input full words 
         if l_cooldown > 0:
             i = 0
+            # continue typing till the we reach the total number of words given by user or timer hits 0
             while i < wpm and timer.text != "0:00":
                 print('typing "' + wlist[i] + '"...')
                 for key in wlist[i]:
@@ -62,19 +66,22 @@ class TypingBot:
                 box.send_keys(Keys.SPACE)
                 i += 1
                 sleep(w_cooldown)
-                
+
 if __name__ == "__main__":
 
     print("\n... LOADING ...")
 
+    # initialize bot object
     bot = TypingBot()
     bot.initialize()
     wlist = bot.get_word_list()
 
+    # intialize type_words() parameters
     words = len(wlist)
     wc = 0
     lc = 0
 
+    # MENU
     print("\n-------- PICK A MODE --------")
     print("1 - Very Slow")
     print("2 - Slow")
@@ -134,7 +141,8 @@ if __name__ == "__main__":
         bot.driver.close()
         exit()
 
+    # begin the test with given arguements
     input("\nPress any key to begin...")
     bot.type_words(words, wc, lc)
-    
+
     print("\n-------- END --------")

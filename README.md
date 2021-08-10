@@ -8,6 +8,7 @@ A 10fastfingers bot made with selenium that takes the typing test with a given w
     * `pip install time`
 * [Chrome Browser](https://www.google.com/intl/en_ca/chrome/)
 * [Chrome webdriver](https://chromedriver.chromium.org/downloads) with its PATH configured.
+* `fast_fingers.py` and `constants.py`
 
 # Usage
 1. Navigate to the project's directory,

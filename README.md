@@ -11,8 +11,8 @@ A 10fastfingers bot made with selenium that takes the typing test with a given w
 
 # Usage
 1. Navigate to the project's directory,
-1. Run `fast_fingers.py`:
+2. Run `fast_fingers.py`:
 ```
 C:\Users\...\typingtest-bot>python fast_fingers.py
 ```
-1. Follow instructions on terminal to select modes and begin the test.
+3. Follow instructions on terminal to select modes and begin the test.
